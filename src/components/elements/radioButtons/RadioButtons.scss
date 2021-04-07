@@ -1,0 +1,67 @@
+input[type='radio'] {
+  cursor: pointer;
+  position: relative;
+  height: 16px;
+  width: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  margin: 0;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid black;
+  }
+  &:checked {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: black;
+      transform: translate(-50%, -50%);
+      visibility: visible;
+    }
+  }
+}
+label {
+  cursor: pointer;
+  padding-left: 0.25rem;
+}
+.form-check {
+  display: flex !important;
+  align-items: center;
+  padding: 0.25rem !important;
+}
+.tooltip-text {
+  min-width: 120px;
+  background-color: #5e6cab;
+  color: #fff;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin:  5px 0 0 9px;
+  padding: 20px;
+  max-width: 290px;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #5e6cab #5e6cab;
+  }
+}
