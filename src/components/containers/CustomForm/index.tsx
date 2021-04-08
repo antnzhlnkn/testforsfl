@@ -1,6 +1,6 @@
 import React from 'react';
-import { Field, reduxForm, getFormValues } from 'redux-form';
-import { useSelector } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { DefaultRootState, useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -12,8 +12,11 @@ import { RadioButtons } from '../../elements/radioButtons/RadioButton';
 import { INITIAL_SALARY_VALUES, salaryFormFieldNames, salaryFormName } from '../../../constants/SalaryForm';
 import { ISalary } from '../../../interfaces/Salary';
 
-const SalaryFormTemplate = () => {
-  const { salary, withoutndfl, typeOfSalary } = useSelector((state) => getFormValues(salaryFormName)(state) as ISalary);
+const SalaryFormTemplate: React.FC = () => {
+  const selector = formValueSelector(salaryFormName);
+  const { salary, withoutndfl, typeOfSalary } = useSelector<DefaultRootState, ISalary>((state) =>
+    selector(state, 'salary', 'withoutndfl', 'typeOfSalary'),
+  );
   return (
     <Container fluid>
       <Form>
@@ -43,7 +46,7 @@ const SalaryFormTemplate = () => {
   );
 };
 
-export const SalaryForm = reduxForm({
+export const SalaryForm = reduxForm<ISalary>({
   form: salaryFormName,
   initialValues: INITIAL_SALARY_VALUES,
 })(SalaryFormTemplate);
